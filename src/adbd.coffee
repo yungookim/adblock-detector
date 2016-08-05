@@ -9,10 +9,10 @@ class root.ADBD
   constructor: (next)->
     scriptElement = document.getElementsByTagName('script')[0]
     adsjs = document.createElement('script')
-    adsjs.src = '/ads.js?&ad_box_=true'
+    adsjs.src = @getAdjsURL()
     adsjs.onload = ->
       # ads.js script loaded
-      checkDOM = window.getDocumentById root.ADBD.checkId
+      checkDOM = window.document.getElementById root.ADBD.checkId
 
       if checkDOM
         # AdBlock not present
@@ -23,7 +23,18 @@ class root.ADBD
         next(true)
         root.ADBD.adsjsLoaded = false
 
+    adsjs.onerror = ->
+      # Adblock enabled
+      next(true)
+      root.ADBD.adsjsLoaded = false
+
     scriptElement.parentNode.insertBefore adsjs, scriptElement
 
   isAdblockPresent:->
     return !root.ADBD.adsjsLoaded
+
+  getAdjsURL: ()->
+    scripts = document.getElementsByTagName('script')
+    for script in scripts
+      if script.src.indexOf 'adbd.js'
+        return script.src.replace 'adbd.js', './ads.js?&ad_box_=true'
