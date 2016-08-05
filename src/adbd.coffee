@@ -9,7 +9,7 @@ class root.ADBD
   constructor: (next)->
     scriptElement = document.getElementsByTagName('script')[0]
     adsjs = document.createElement('script')
-    adsjs.src = '/ads.js'
+    adsjs.src = '/ads.js?&ad_box_=true'
     adsjs.onload = ->
       # ads.js script loaded
       checkDOM = window.getDocumentById root.ADBD.checkId
