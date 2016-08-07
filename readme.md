@@ -1,6 +1,4 @@
-## Still in development mode. Never tested yet
-  
-# Micro javascript library for checking the presence of Adblock
+## Micro javascript library for checking the presence of Adblock
 
 Usage  
   
